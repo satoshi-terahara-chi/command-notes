@@ -24,7 +24,7 @@ docker ps -aq | xargs docker rm && docker images -aq | xargs docker rmi
 docker run --rm -v "$(PWD)":/opt/app/src --name python-sample -it python:3.10.2-bullseye /bin/bash --login
 
 # run go docker with volume share
-docker run --rm -v "$(PWD)":/go/src --name go-sample -it golang:1.17.6-bullseye /bin/bash --login
+docker run --rm -v "$(PWD)":/go/src --name go-sample -it golang:1.17.6-bullseye /bin/bash
 
 # run JupyterNotebook
 docker run --rm -v "$(PWD)":/home/jovyan/work -p 8888:8888 --name jupyter jupyter/scipy-notebook
@@ -32,3 +32,4 @@ docker run --rm -v "$(PWD)":/home/jovyan/work -p 8888:8888 --name jupyter jupyte
 # run node docker
 docker run --rm -v "$(PWD)":/opt/app/src --name node-sample -it node:16.13.2-bullseye /bin/bash --login
 ```
+
