@@ -2,7 +2,7 @@
 
 ## LOGIN
 
-```bash
+```.bash
 # login to container
 docker exec -it node-docker.app /bin/bash --login
 
@@ -12,7 +12,23 @@ docker exec -it -w /share/fuootus node-docker.app /bin/bash --login
 
 ## REMOVE
 
-```bash
+```.bash
 # remove containers and images
 docker ps -aq | xargs docker rm && docker images -aq | xargs docker rmi
+```
+
+## RUN
+
+```.bash
+# run python docker
+docker run --rm -v "$(PWD)":/opt/app/src --name python-sample -it python:3.10.2-bullseye /bin/bash --login
+
+# run go docker with volume share
+docker run --rm -v "$(PWD)":/go/src --name go-sample -it golang:1.17.6-bullseye /bin/bash --login
+
+# run JupyterNotebook
+docker run --rm -v "$(PWD)":/home/jovyan/work -p 8888:8888 --name jupyter jupyter/scipy-notebook
+
+# run node docker
+docker run --rm -v "$(PWD)":/opt/app/src --name node-sample -it node:16.13.2-bullseye /bin/bash --login
 ```
