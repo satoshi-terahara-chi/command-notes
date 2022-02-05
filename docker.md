@@ -13,6 +13,12 @@ docker exec -it -w /share/fuootus node-docker.app /bin/bash --login
 ## REMOVE
 
 ```.bash
+# stop containers
+docker ps -q | xargs docker stop
+# remove containers
+docker ps -aq | xargs docker rm -f
+# remove containers and images
+docker ps -aq | xargs docker rm -f && docker images -aq | xargs docker rmi -f
 # remove containers and images and caches
 docker ps -aq | xargs docker rm -f && docker images -aq | xargs docker rmi -f && docker system prune --volumes -f
 ```
