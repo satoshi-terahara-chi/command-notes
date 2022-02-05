@@ -44,9 +44,15 @@ if [ -f ~/.bashrc ] ; then
 . ~/.bashrc
 fi
 
-alias la='ls -la -F'
-alias ll='ls -la -F'
-alias lt='ls -tlr -F'
+# zshをデフォルトにしないと警告出るのを非表示
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# iTerm2
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+
+# anyenv
+eval "$(anyenv init -)"
 ```
 
 ~/.bashrc
@@ -54,6 +60,12 @@ alias lt='ls -tlr -F'
 ```bash
 source /usr/local/Cellar/git/2.21.0/etc/bash_completion.d/git-prompt.sh
 source /usr/local/Cellar/git/2.21.0/etc/bash_completion.d/git-completion.bash
+
+# エイリアス
+alias ll='exa -lahF --time-style=long-iso --no-permissions --no-user --icons'
+alias lr='ll -s=modified -r'
+alias cat='bat --paging=never'
+alias catd='cat --decorations=never'
 
 # 出力の後に改行を入れる
 function add_line {
@@ -88,12 +100,6 @@ echo 'shell_session_update' > $HOME/.bash_logout
 
 ```bash
 chsh -s /bin/bash
-```
-
-### Mac で zshをデフォルトにしないと警告出るのを非表示にする
-
-```bash
-echo "export BASH_SILENCE_DEPRECATION_WARNING=1" >> ~/.bash_profile
 ```
 
 ### Finderで隠しファイルを表示する設定
